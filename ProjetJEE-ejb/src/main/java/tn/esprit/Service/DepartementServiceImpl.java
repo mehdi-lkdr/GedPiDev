@@ -30,13 +30,13 @@ public class DepartementServiceImpl implements DepartementServiceLocal , Departe
 	}
 
 	@Override
-	public void deleteDepartement(int deptId) {
+	public void deleteDepartement(String deptId) {
 		// TODO Auto-generated method stub
 		em.remove(getDepartement(deptId));
 	}
 
 	@Override
-	public Department getDepartement(int deptId) {
+	public Department getDepartement(String deptId) {
 		// TODO Auto-generated method stub
 		return em.find(Department.class, deptId);
 	}

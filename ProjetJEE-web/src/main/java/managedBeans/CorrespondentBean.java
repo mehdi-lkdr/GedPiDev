@@ -57,7 +57,10 @@ public class CorrespondentBean implements Serializable{
 	
 	@PostConstruct
 	public void loadAllCorrespendant(){
+		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		correspendentList = correspondentServicelocal.getCorrespondentList() ; 
+		if(null!=req.getParameter("id"))
+			updatePageCorrespondent(req.getParameter("id"));
 	}
 	
 	
@@ -227,11 +230,12 @@ public class CorrespondentBean implements Serializable{
 		
 	}
 	
-	public void updateCorrespondent(Correspondent correspondent){
-		correspondentServicelocal.updateCorrespondent(correspondent);
+	public String updateCorrespondent(){
+		correspondentServicelocal.updateCorrespondent(c);
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correspondent Updated Avec Succés",
 				null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		return  "listCorrespondent.xhtml?faces-redirect=true";
 	}
 	
 	//Success

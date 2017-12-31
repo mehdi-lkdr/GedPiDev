@@ -13,8 +13,8 @@ public interface DepartementServiceLocal {
 	
 	public void saveDepartement(Department dept) ; 
 	public void updateDepartement(Department dept) ; 
-	public void deleteDepartement(int deptId) ; 
-	public Department getDepartement(int deptId) ; 
+	public void deleteDepartement(String deptId) ; 
+	public Department getDepartement(String deptId) ; 
 	
 	public List<Department> getDepartementList(); 
 	

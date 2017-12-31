@@ -16,7 +16,7 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private String departementId;
 
 	@Column(length = 255)
@@ -31,11 +31,11 @@ public class Department implements Serializable {
 	private int telephone;
 
 	//bi-directional many-to-one association to Aspnetuser
-	@OneToMany(mappedBy="department")
+	@OneToMany(mappedBy="department", cascade = CascadeType.ALL)
 	private List<Aspnetuser> aspnetusers;
 
 	//bi-directional many-to-many association to Workflow
-	@ManyToMany(mappedBy="departments")
+	@ManyToMany(mappedBy="departments", cascade = CascadeType.ALL)
 	private List<Workflow> workflows;
 
 	public Department() {

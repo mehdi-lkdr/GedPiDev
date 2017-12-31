@@ -11,11 +11,11 @@
 </h:head>
 <h:body>
 	<ui:composition template="template/layout.xhtml">
-		<ui:define name="title">List Correspondent</ui:define>
+		<ui:define name="title">List Departements</ui:define>
 		<ui:define name="main">
 			<div class="header-info">
 				<h1 class="header-title">
-					<strong>Liste </strong>des Correspondent
+					<strong>Liste </strong>des Departements
 				</h1>
 			</div>
 			<div class="code-preview">
@@ -40,28 +40,29 @@
 						<table class="table table-separated" >
 							<thead>
 								<tr>
-									<th>Correspondent ID</th>
-									<th>Nom Correspondant</th>
+									<th>Departement ID</th>
+									<th>Nom Departement</th>
+									<th>Telephone</th>
 									<th>Email</th>
-									<th>Fax</th>
-									<th>Telephone</th>	
+									<th>Responsable</th>	
 									<th><center>Supprimer</center></th>
 									
 								</tr>
 							</thead>
 							<tbody data-provide="sortable" data-sortable-handle=".sortable-dot" data-sortable-id="3" aria-dropeffect="move">
-								<ui:repeat var="correspendentList" value="#{Correspondent.correspendentList}">
+								<ui:repeat var="departementList" value="#{Departement.departementList}">
 								<tr >
 									
 									
-										<td><a href="updateCorrespondent.xhtml?id=#{correspendentList.correspondentId}"><h:outputText value="Edit"/></a></td>
-										<td><h:outputText value="#{correspendentList.correspondentId}"></h:outputText></td>
-										<td><h:outputText value="#{correspendentList.nomCorrespondant}"></h:outputText></td>
-										<td><h:outputText value="#{correspendentList.email}"></h:outputText></td>
-										<td><h:outputText value="#{correspendentList.telephone}"></h:outputText></td>
-										<td><h:outputText value="#{correspendentList.fax}"></h:outputText></td>
+										<td><a href="UpdateDepartement.xhtml?id=#{departementList.departementId}"><h:outputText value="Edit"/></a></td>
+										<td><h:outputText value="#{departementList.departementId}"></h:outputText></td>
+										<td><h:outputText value="#{departementList.nomDepartement}"></h:outputText></td>
+										<td><h:outputText value="#{departementList.telephone}"></h:outputText></td>
+										<td><h:outputText value="#{departementList.email}"></h:outputText></td>
+										<td><h:outputText value="#{departementList.responsable}"></h:outputText></td>
+									
 										
-										<td><center><h:form><h:commandButton action="#{Correspondent.supprimerCorrespondent(correspendentList.correspondentId)}" value="Supprimer" class="btn btn-w-md btn-outline btn-danger"/></h:form></center></td>
+										<td><center><h:form><h:commandButton action="#{Departement.supprimerDepartement(departementList.departementId)}" value="Supprimer" class="btn btn-w-md btn-outline btn-danger"/></h:form></center></td>
 									
 										
 								</tr>
