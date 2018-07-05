@@ -36,7 +36,7 @@ public class Correspondent implements Serializable {
 	private Adress adress;
 
 	//bi-directional many-to-one association to Courrier
-	@OneToMany(mappedBy="correspondent")
+	@OneToMany(mappedBy="correspondent",cascade =CascadeType.ALL)
 	private List<Courrier> courriers;
 
 	public Correspondent() {

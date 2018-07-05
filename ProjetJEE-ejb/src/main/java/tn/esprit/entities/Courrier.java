@@ -16,7 +16,6 @@ public class Courrier implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String courrierId;
 
 	@Column(length = 255)
@@ -33,7 +32,7 @@ public class Courrier implements Serializable {
 	private String typeCourrier;
 
 	//bi-directional many-to-one association to Attachement
-	@OneToMany(mappedBy="courrier")
+	@OneToMany(mappedBy="courrier",cascade =CascadeType.ALL)
 	private List<Attachement> attachements;
 
 	//bi-directional many-to-one association to Correspondent
