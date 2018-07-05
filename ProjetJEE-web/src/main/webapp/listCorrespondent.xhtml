@@ -54,8 +54,13 @@
 								<tr >
 										<th>
 										<span class="sortable-dot" draggable="true"></span>
-										<a href="updateCorrespondent.xhtml?id=#{correspendentList.correspondentId}"><h:outputText value="#{correspendentList.correspondentId}"/></a>
+										<h:form><h:commandButton action="#{Correspondent.updatePageCorrespondent(correspendentList.correspondentId)}" value="Update" class="btn btn-w-md btn-outline btn-danger"/></h:form>
 										</th>
+										<td>
+										<h:form>
+										<h:commandButton action="#{Correspondent.getCorrespondent(correspendentList.correspondentId)}"  value="#{correspendentList.correspondentId}" />
+										</h:form>
+										</td>
 
 										<td><h:outputText value="#{correspendentList.nomCorrespondant}"></h:outputText></td>
 										<td><h:outputText value="#{correspendentList.email}"></h:outputText></td>

@@ -22,7 +22,7 @@ import tn.esprit.entities.Correspondent;
 
 
 @ManagedBean(name="Correspondent")
-@ViewScoped
+@SessionScoped
 public class CorrespondentBean implements Serializable{
 	
 	
@@ -52,6 +52,8 @@ public class CorrespondentBean implements Serializable{
 	private int telephone;
 	
 	private List<Correspondent> correspendentList ; 
+	
+	private boolean edit  ;
 	
 	@PostConstruct
 	public void loadAllCorrespendant(){
@@ -170,6 +172,18 @@ public class CorrespondentBean implements Serializable{
 //	}
 
 
+	public boolean isEdit() {
+		return edit;
+	}
+
+
+
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
+
+
+
 	public CorrespondentBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -192,6 +206,23 @@ public class CorrespondentBean implements Serializable{
 	public void getAllCorrespondent(ActionEvent actionEvent){	
 	
 		correspendentList = correspondentServicelocal.getCorrespondentList();
+
+		
+	}
+	
+	
+	public String updatePageCorrespondent(String  correspondent){	
+		
+		this.c=  correspondentServicelocal.getCorrespondent(correspondent);
+
+		this.edit = true ; 
+		return "/updateCorrespondent.xhtml?faces-redirect=true";
+	}
+	
+	
+	public Correspondent getCorrespondent(String  correspondent){	
+		
+		return correspondentServicelocal.getCorrespondent(correspondent);
 
 		
 	}
