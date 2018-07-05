@@ -12,8 +12,8 @@ public interface CorrespondentServiceRemote {
 	
 	public void saveCorrespondent(Correspondent corresp) ; 
 	public void updateCorrespondent(Correspondent corresp) ; 
-	public void deleteCorrespondent(int correspId) ; 
-	public Correspondent getCorrespondent(int correspondentId); 
+	public void deleteCorrespondent(String correspId) ; 
+	public Correspondent getCorrespondent(String correspondentId); 
 	public List<Correspondent>  getCorrespondentList(); 
 	
 	

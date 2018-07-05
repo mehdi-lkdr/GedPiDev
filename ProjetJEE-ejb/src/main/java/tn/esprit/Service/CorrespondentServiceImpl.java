@@ -30,14 +30,14 @@ public class CorrespondentServiceImpl implements CorrespondentServicelocal , Cor
 	}
 
 	@Override
-	public void deleteCorrespondent(int correspId) {
+	public void deleteCorrespondent(String correspId) {
 		// TODO Auto-generated method stub
 		
 		em.remove(getCorrespondent(correspId));
 	}
 
 	@Override
-	public Correspondent getCorrespondent(int correspondentId) {
+	public Correspondent getCorrespondent(String correspondentId) {
 		// TODO Auto-generated method stub
 		return em.find(Correspondent.class, correspondentId);
 	}

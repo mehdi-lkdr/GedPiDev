@@ -1,23 +1,28 @@
 package managedBeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import tn.esprit.Service.CorrespondentServicelocal;
-import tn.esprit.entities.Adress;
+
 import tn.esprit.entities.Correspondent;
-import tn.esprit.entities.Courrier;
+
 
 
 @ManagedBean(name="Correspondent")
-@SessionScoped
+@ViewScoped
 public class CorrespondentBean implements Serializable{
 	
 	
@@ -45,16 +50,48 @@ public class CorrespondentBean implements Serializable{
 	private String nomCorrespondant;
 
 	private int telephone;
-
+	
+	private List<Correspondent> correspendentList ; 
+	
+	@PostConstruct
+	public void loadAllCorrespendant(){
+		correspendentList = correspondentServicelocal.getCorrespondentList() ; 
+	}
+	
+	
 
 //	private Adress adress;
 //
 //
 //	private List<Courrier> courriers;
 
+	
+	
+	
+	
+
+	public Correspondent getC() {
+		return c;
+	}
+
+
+	public void setC(Correspondent c) {
+		this.c = c;
+	}
+
 
 	public String getCorrespondentId() {
 		return correspondentId;
+	}
+
+
+	public List<Correspondent> getCorrespendentList() {
+		return correspendentList;
+	}
+
+
+	public void setCorrespendentList(List<Correspondent> correspendentList) {
+		this.correspendentList = correspendentList;
 	}
 
 
@@ -152,9 +189,36 @@ public class CorrespondentBean implements Serializable{
 	
 	
 	
+	public void getAllCorrespondent(ActionEvent actionEvent){	
+	
+		correspendentList = correspondentServicelocal.getCorrespondentList();
+
+		
+	}
+	
+	public void updateCorrespondent(Correspondent correspondent){
+		correspondentServicelocal.updateCorrespondent(correspondent);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correspondent Updated Avec Succés",
+				null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	//Success
+	public void supprimerCorrespondent(String correspondentId) {
+		correspondentServicelocal.deleteCorrespondent(correspondentId);;
+		try {
+			refreshPage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
-	
+	public void refreshPage() throws IOException {
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+	}
 	
 	
 	

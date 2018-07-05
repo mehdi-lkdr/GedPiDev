@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import tn.esprit.entities.Attachement;
-import tn.esprit.entities.Correspondent;
+
 
 @Stateless
 public class AttachementServiceImpl implements AttachementServiceLocal , AttachementServiceRemote {

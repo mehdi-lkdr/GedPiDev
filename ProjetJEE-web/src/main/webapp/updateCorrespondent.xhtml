@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="template/layout.xhtml">
+		<ui:define name="title">Correspondent || Update</ui:define>
+		<ui:define name="main">
+		<center>
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-separated">
+							<thead>
+				
+								
+							</thead>
+							<tbody>
+								<h:form>
+									<tr class="bg-pale-secondary"><td>Correspondent ID</td> <td><h:inputText class="form-control" value="#{Correspondent.c.correspondentId}"  /></td></tr>
+										<tr ><td>Nom Correspondant</td><td><h:inputText class="form-control" value="#{Correspondent.c.nomCorrespondant}"  /></td></tr>
+										<tr > <td>Email</td> <td> <h:inputText class="form-control" value="#{Correspondent.c.email}"/> </td> </tr>
+										<tr class="bg-pale-secondary"><td>Fax</td><td><h:inputText class="form-control" value="#{Correspondent.c.fax}"  ></h:inputText></td></tr>
+										<tr class="bg-pale-secondary"><td>Telephone</td><td><h:inputText class="form-control" value="#{Correspondent.c.telephone}"  /></td></tr>
+										<tr class="bg-pale-secondary"><td></td><td><h:commandButton action="#{Correspondent.updateCorrespondent(Correspondent)}" class="btn btn-w-md btn-bold btn-info" value="Soumettre" /></td></tr>
+									
+								</h:form>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</center>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</h:html>
