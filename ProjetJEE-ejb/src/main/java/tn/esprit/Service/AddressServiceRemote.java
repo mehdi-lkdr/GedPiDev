@@ -12,7 +12,7 @@ public interface AddressServiceRemote {
 	
 	public void saveAdresse(Adress adress) ; 
 	public void updateAdresse(Adress adress) ; 
-	public void deleteAdresse(Adress adress) ; 
+	public void deleteAdresse(int adressId) ; 
 	public Adress getAdresseById(int idAdresse) throws Exception ; 
 	public List<Adress> getListAdresse();
 }
