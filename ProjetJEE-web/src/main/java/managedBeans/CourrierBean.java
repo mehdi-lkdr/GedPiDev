@@ -1,18 +1,17 @@
 package managedBeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.servlet.http.HttpServletRequest;
 
 import tn.esprit.Service.CourrierServiceLocal;
 import tn.esprit.entities.Attachement;
@@ -20,7 +19,7 @@ import tn.esprit.entities.Correspondent;
 import tn.esprit.entities.Courrier;
 
 @ManagedBean(name = "Courrier")
-@ViewScoped
+@SessionScoped
 public class CourrierBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,7 +33,17 @@ public class CourrierBean implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	private List<Courrier> listcourriers ; 
+	
+	@PostConstruct
+	public void  init(){
+		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		listcourriers = new ArrayList<>() ; 
+		this.listcourriers=courrierService.getCourrierList() ; 
+		if(null!=req.getParameter("id"))
+			updateCourrier(req.getParameter("id"));
+	}
+		
 	private String courrierId;
 
 	public String getCourrierId() {
@@ -127,28 +136,27 @@ public class CourrierBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public void UpdateCourrier(ActionEvent actionEvent) {
-		cr = courrierService.getCourrier(courrierId);
+	public void getAllCourriers(){	
+		listcourriers = courrierService.getCourrierList();
+	}
+
+	public String updateCourrier(String courrierId){
+		this.cr = courrierService.getCourrier(courrierId) ; 
+		return  "updateCourrier.xhtml?faces-redirect=true";
+	}
+
+	public List<Courrier> getListcourriers() {
+		return this.listcourriers;
+	}
+
+	public void setListcourriers(List<Courrier> listcourriers) {
+		this.listcourriers = listcourriers;
+	}
+
+	public String updateCourrierPut(){
 		courrierService.updateCourrier(cr);
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été mis à jour.", null);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été mis a jour.", null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		return  "ListCourrier.xhtml?faces-redirect=true";
 	}
-
-	public void DeleteCourrier(ActionEvent actionEvent) {
-		cr = courrierService.getCourrier(courrierId);
-		courrierService.deleteCourrier(cr.getCourrierId());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été supprimé.", null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-
-	}
-
-	public Courrier GetCourrier(ActionEvent actionEvent) {
-		 
-		return courrierService.getCourrier(courrierId);
-	}
-
-	public List<Courrier> GetListCourrier(ActionEvent actionEvent) {
-		return courrierService.getCourrierList();
-	}
-
 }

@@ -12,8 +12,8 @@ public interface CourrierServiceRemote {
 	
 	public void saveCourrier(Courrier courrier) ; 
 	public void updateCourrier(Courrier courrier) ; 
-	public void deleteCourrier(int courrierId) ; 
-	public Courrier getCourrier(int courrierId) ; 
+	public void deleteCourrier(String courrierId) ; 
+	public Courrier getCourrier(String courrierId) ; 
 	public List<Courrier> getCourrierList() ; 
 	
 }

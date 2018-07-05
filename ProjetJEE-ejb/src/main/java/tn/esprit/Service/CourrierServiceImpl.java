@@ -33,13 +33,13 @@ public class CourrierServiceImpl implements CourrierServiceLocal , CourrierServi
 	}
 
 	@Override
-	public void deleteCourrier(int courrierId) {
+	public void deleteCourrier(String courrierId) {
 		// TODO Auto-generated method stub
 		em.remove(getCourrier(courrierId));
 	}
 
 	@Override
-	public Courrier getCourrier(int courrierId) {
+	public Courrier getCourrier(String courrierId) {
 		// TODO Auto-generated method stub
 		return em.find(Courrier.class, courrierId);
 	}
