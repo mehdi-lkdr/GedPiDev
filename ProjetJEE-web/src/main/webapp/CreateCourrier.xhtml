@@ -18,41 +18,36 @@
 				</h1>
 			</div>
 			<div class="col-md-offset-4">
-				<h:form>
+				<h:form enctype="multipart/form-data">
 				<p:growl id="growl" life="2000" />
-					
-					
 				
-					
+				
 					<div class="form-group">
-						<label for="input-normal">Name</label>
+						<label for="input-normal">Type Courrier </label>
 						<div class="form-group">
-							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.detail}"  >
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.typeCourrier}"  >
 								
 							</h:inputText>
 						</div>
 					</div>
 					
+					<div class="form-group">
+						<label for="input-normal">Attachement</label>
 						<div class="form-group">
-						<label for="input-normal"></label>
+							
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input-normal">Etat</label>
 						<div class="form-group">
 							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.etat}"  >
 								
 							</h:inputText>
 						</div>
 					</div>
-					
-						<div class="form-group">
-						<label for="input-normal"></label>
-						<div class="form-group">
-							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.objetCourrier}"  >
-								
-							</h:inputText>
-						</div>
-					</div>
-					
 					<div class="form-group">
-						<label for="input-normal"></label>
+						<label for="input-normal">Sens</label>
 						<div class="form-group">
 							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.sense}"  >
 								
@@ -61,9 +56,37 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="input-normal"></label>
+						<label for="input-normal">Correspondent</label>
 						<div class="form-group">
-							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.typeCourrier}"  >
+						
+						
+						
+						
+					<h:selectOneMenu value="#{Courrier.selectedValue}"  class="form-control w-300px"> 
+					 <f:selectItems  value="#{Courrier.listcorrespendent}" var="tag"
+                                  itemLabel="#{tag.nomCorrespondant}" itemValue="#{tag.correspondentId}"/>  
+					
+						</h:selectOneMenu> 	
+							
+								
+						
+						</div>
+					</div>
+					
+						<div class="form-group">
+						<label for="input-normal">Objet</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.objetCourrier}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+						
+					<div class="form-group">
+						<label for="input-normal">Detail</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Courrier.cr.detail}"  >
 								
 							</h:inputText>
 						</div>
@@ -71,11 +94,15 @@
 					
 					
 					
+				
+					
+					
+					
 					
 					
 					<br />
 					<h:commandButton update="growl" actionListener="#{Courrier.saveCourrier}"
-						class="btn btn-w-md btn-round btn-success" value="Submit" />
+						class="btn btn-w-md btn-round btn-success" value="Sauvegarder" />
 				</h:form>
 			</div>
 		</ui:define>

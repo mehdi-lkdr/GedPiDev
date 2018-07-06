@@ -40,12 +40,13 @@
 						<table class="table table-separated" >
 							<thead>
 								<tr>
-									<th>Correspondent ID</th>
-									<th>Nom Correspondant</th>
-									<th>Email</th>
-									<th>Fax</th>
-									<th>Telephone</th>	
-									<th><center>Supprimer</center></th>
+								<th>Action</th>	
+									<th>Objet</th>
+									<th>Detail</th>
+									<th>Etat</th>
+									<th>sense</th>
+									<th>Type</th>	
+									<th>Supprimer</th>
 									
 								</tr>
 							</thead>
@@ -64,7 +65,7 @@
 									<td><h:outputText value="#{cr.typeCourrier}"></h:outputText></td>
 	
 										
-										<td><center><h:form><h:commandButton action="#{Courrier.supprimerCourrier(cr.courrierId)}" value="Supprimer" class="btn btn-w-md btn-outline btn-danger"/></h:form></center></td>
+										<td><h:form><h:commandButton action="#{Courrier.supprimerCourrier(cr.courrierId)}" value="Supprimer" class="btn btn-w-md btn-outline btn-danger"/></h:form></td>
 									
 										
 								</tr>

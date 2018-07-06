@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
+import tn.esprit.Service.CorrespondentServicelocal;
 import tn.esprit.Service.CourrierServiceLocal;
 import tn.esprit.entities.Attachement;
 import tn.esprit.entities.Correspondent;
@@ -30,13 +31,29 @@ public class CourrierBean implements Serializable {
 
 	@EJB
 	CourrierServiceLocal courrierService;
+	
+	@EJB
+	CorrespondentServicelocal correspondentService ; 
 
 	public CourrierBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	private List<Courrier> listcourriers ; 
 	
+	private String selectedValue;
+	 
+	public String getSelectedValue() {
+		return selectedValue;
+	}
+ 
+	public void setSelectedValue(String selectedValue) {
+		this.selectedValue = selectedValue;
+	}
+	private List<Courrier> listcourriers ; 
+	private List<Correspondent> listcorrespendent ; 
+	
+	
+
 	@PostConstruct
 	public void  init(){
 		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -44,8 +61,17 @@ public class CourrierBean implements Serializable {
 		this.listcourriers=courrierService.getCourrierList() ; 
 		if(null!=req.getParameter("id"))
 			updateCourrier(req.getParameter("id"));
+		listcorrespendent = correspondentService.getCorrespondentList() ; 
 	}
 		
+	public List<Correspondent> getListcorrespendent() {
+		return listcorrespendent;
+	}
+
+	public void setListcorrespendent(List<Correspondent> listcorrespendent) {
+		this.listcorrespendent = listcorrespendent;
+	}
+
 	private String courrierId;
 
 	public String getCourrierId() {
@@ -129,10 +155,11 @@ public class CourrierBean implements Serializable {
 	}
 
 	public void saveCourrier(ActionEvent actionEvent) {
-
-		cr.setCourrierId("1c");
+		
+		Correspondent c = correspondentService.getCorrespondent(selectedValue);
+		cr.setCourrierId("sss");
 		cr.setAttachements(null);
-		cr.setCorrespondent(null);
+		cr.setCorrespondent(c);
 		courrierService.saveCourrier(cr);
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été sauvegardé.", null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
@@ -164,8 +191,8 @@ public class CourrierBean implements Serializable {
 	
 	//Success
 		public void supprimerCourrier(String courrierId) {
-			courrierService.deleteCourrier(courrierId);
 			try {
+				courrierService.deleteCourrier(courrierId);
 				refreshPage();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
