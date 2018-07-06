@@ -12,14 +12,12 @@ import tn.esprit.entities.Adress;
 public class FirstService {
 	
 	
-	@Inject
-	 AddressService adService ;
+	
 	
 	
 	public Adress getAddress() throws Exception{
 		
-		Adress a = adService.getAdresseById(1);
-		return a ; 
+	return new Adress() ;
 		
 	}
 

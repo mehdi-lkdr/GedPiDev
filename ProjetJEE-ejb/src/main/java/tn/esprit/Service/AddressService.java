@@ -14,8 +14,8 @@ public interface AddressService {
 	
 	public void saveAdresse(Adress adress) ; 
 	public void updateAdresse(Adress adress) ; 
-	public void deleteAdresse(int adressId) ; 
-	public Adress getAdresseById(int idAdresse) throws Exception ; 
+	public void deleteAdresse(String adressId) ; 
+	public Adress getAdresseById(String idAdresse) throws Exception ; 
 	public List<Adress> getListAdresse();
 	
 	

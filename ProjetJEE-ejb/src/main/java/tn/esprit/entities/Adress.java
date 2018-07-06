@@ -3,6 +3,9 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the adresses database table.
@@ -15,28 +18,32 @@ public class Adress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty
 	private String adresseId;
-
+	@JsonProperty
 	private int codePostal;
 
+	@JsonProperty
 	@Column(length = 255)
 	private String pays;
 
+	@JsonProperty
 	@Column(length = 255)
 	private String rue;
-
+	
+	@JsonProperty
 	@Column(length = 255)
 	private String ville;
-
+	
 	//bi-directional one-to-one association to Correspondent
+	@JsonProperty
 	@OneToOne
 	@JoinColumn(name="AdresseId")
 	private Correspondent correspondent;
 
 	public Adress() {
 	}
-
+	@JsonProperty
 	public String getAdresseId() {
 		return this.adresseId;
 	}
@@ -84,5 +91,17 @@ public class Adress implements Serializable {
 	public void setCorrespondent(Correspondent correspondent) {
 		this.correspondent = correspondent;
 	}
-
+	@JsonCreator
+	public Adress(@JsonProperty("adresseId")String adresseId,@JsonProperty("codePostal") int codePostal,@JsonProperty("pays") String pays,
+			@JsonProperty("rue") String rue,@JsonProperty("ville") String ville,
+			@JsonProperty("correspondent")Correspondent correspondent) {
+		super();
+		this.adresseId = adresseId;
+		this.codePostal = codePostal;
+		this.pays = pays;
+		this.rue = rue;
+		this.ville = ville;
+		this.correspondent = correspondent;
+	}
+	
 }

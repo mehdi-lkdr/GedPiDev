@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
+import tn.esprit.Service.AddressService;
 import tn.esprit.Service.CorrespondentServicelocal;
 import tn.esprit.Service.CourrierServiceLocal;
 import tn.esprit.entities.Attachement;
@@ -28,7 +29,7 @@ public class CourrierBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Courrier cr = new Courrier();
-
+	
 	@EJB
 	CourrierServiceLocal courrierService;
 	
