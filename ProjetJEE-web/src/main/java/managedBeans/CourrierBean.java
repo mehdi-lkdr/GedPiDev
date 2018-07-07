@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,6 +21,7 @@ import org.primefaces.model.chart.PieChartModel;
 
 import tn.esprit.Service.CorrespondentServicelocal;
 import tn.esprit.Service.CourrierServiceLocal;
+import tn.esprit.entities.Aspnetuser;
 import tn.esprit.entities.Attachement;
 import tn.esprit.entities.Correspondent;
 import tn.esprit.entities.Courrier;
@@ -64,10 +66,16 @@ public class CourrierBean implements Serializable {
 	private List<Courrier> listreceived;
 	private List<Courrier> listavalider;
 	private Part file; 
-
+	private Aspnetuser u ;
 	
 	@PostConstruct
 	public void  init(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+    	Map<String, Object> sessionMap = externalContext.getSessionMap();
+    	 u = (Aspnetuser) sessionMap.get("navigationUser");
+    	if(u == null) {
+    		
+    	}
 		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		listcourriers = new ArrayList<>() ; 
 		listSent = new ArrayList<>() ; 
@@ -108,8 +116,8 @@ public class CourrierBean implements Serializable {
 	public List<Courrier> getSentCourriers(){	
 		
 		for (Courrier cour:listcourriers) 
-		{
-			if (cour.getSender().equals("sssa"))
+		{Correspondent c = correspondentService.getCorrespondent(cour.getSender()) ;
+			if (c.getUserId().equals(u.getId()))
 			{
 				listSent.add(cour);
 			}
@@ -123,7 +131,8 @@ public class CourrierBean implements Serializable {
 		
 		for (Courrier cour:listcourriers) 
 		{
-			if (cour.getCorrespondent().getCorrespondentId().equals("thebest"))
+			
+			if (cour.getCorrespondent().getUserId().equals(u.getId()))
 			{
 				listreceived.add(cour);
 			}
@@ -173,13 +182,14 @@ public class CourrierBean implements Serializable {
 		
 	
 		
-		public void validerCourrier(String courrierId) {
+		public String validerCourrier(String courrierId) {
 			this.cr = courrierService.getCourrier(courrierId) ; 
 			cr.setEtat(true);
-			courrierService.saveCourrier(cr);
+			courrierService.updateCourrier(cr);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été validé.", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			
+			return  "ListCourrier.xhtml?faces-redirect=true";
 		}
 		
 		public void rechercheCourrier(ActionEvent actionEvent) {
@@ -368,6 +378,18 @@ public class CourrierBean implements Serializable {
 
 		public void setListavalider(List<Courrier> listavalider) {
 			this.listavalider = listavalider;
+		}
+
+
+
+		public Aspnetuser getU() {
+			return u;
+		}
+
+
+
+		public void setU(Aspnetuser u) {
+			this.u = u;
 		}
 
 }
