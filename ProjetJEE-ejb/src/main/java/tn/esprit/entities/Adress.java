@@ -18,20 +18,20 @@ public class Adress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@JsonProperty
+	@JsonProperty("AdressId")
 	private String adresseId;
-	@JsonProperty
+	@JsonProperty("CodePostal")
 	private int codePostal;
 
-	@JsonProperty
+	@JsonProperty("Pays")
 	@Column(length = 255)
 	private String pays;
 
-	@JsonProperty
+	@JsonProperty("Rue")
 	@Column(length = 255)
 	private String rue;
 	
-	@JsonProperty
+	@JsonProperty("Ville")
 	@Column(length = 255)
 	private String ville;
 	
@@ -39,7 +39,6 @@ public class Adress implements Serializable {
 
 	public Adress() {
 	}
-	@JsonProperty
 	public String getAdresseId() {
 		return this.adresseId;
 	}
@@ -82,9 +81,9 @@ public class Adress implements Serializable {
 
 
 	@JsonCreator
-	public Adress(@JsonProperty("adresseId")String adresseId,@JsonProperty("codePostal") int codePostal,@JsonProperty("pays") String pays,
-			@JsonProperty("rue") String rue,@JsonProperty("ville") String ville,
-			@JsonProperty("correspondent")Correspondent correspondent) {
+	public Adress(@JsonProperty("AdresseId")String adresseId,@JsonProperty("CodePostal") int codePostal,@JsonProperty("Pays") String pays,
+			@JsonProperty("Rue") String rue,@JsonProperty("Ville") String ville,
+			@JsonProperty("Correspondent")Correspondent correspondent) {
 		super();
 		this.adresseId = adresseId;
 		this.codePostal = codePostal;

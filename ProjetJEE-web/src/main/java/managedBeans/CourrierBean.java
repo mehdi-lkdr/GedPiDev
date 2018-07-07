@@ -1,12 +1,9 @@
 package managedBeans;
 
 import java.io.IOException;
-
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,12 +16,8 @@ import javax.faces.event.ActionEvent;
 import javax.mail.Part;
 import javax.servlet.http.HttpServletRequest;
 
-<<<<<<< HEAD
-import tn.esprit.Service.AddressService;
-=======
 import org.primefaces.model.chart.PieChartModel;
 
->>>>>>> add final touch on courrier
 import tn.esprit.Service.CorrespondentServicelocal;
 import tn.esprit.Service.CourrierServiceLocal;
 import tn.esprit.entities.Attachement;
@@ -46,66 +39,40 @@ public class CourrierBean implements Serializable {
 	CorrespondentServicelocal correspondentService ; 
 	
 	
-	private Part file; // +getter+setter
-
 
 
 	public CourrierBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	private PieChartModel pieModel1;
+	private String objetCourrier;
+	private String detail;
+	private byte etat;  //valid
+	private byte sense;  //sent 
+	private String typeCourrier;  //in ,out
+	private List<Attachement> attachements;
+	private Correspondent correspondent;
+	private Correspondent sender;
 	
+	private PieChartModel pieModel1;
 	private String userid;
 	private String selectedValue;
 	private String selectedSender;
-	 
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public String getSelectedValue() {
-		return selectedValue;
-	}
- 
-	public void setSelectedValue(String selectedValue) {
-		this.selectedValue = selectedValue;
-	}
 	private List<Courrier> listcourriers ; 
 	private List<Correspondent> listcorrespendent ; 
 	private List<Courrier> listSent;
 	private List<Courrier> listreceived;
+	private List<Courrier> listavalider;
+	private Part file; 
 
-	public List<Courrier> getListSent() {
-		return listSent;
-	}
-
-	public void setListSent(List<Courrier> listSent) {
-		this.listSent = listSent;
-	}
-
-	public List<Courrier> getListreceived() {
-		return listreceived;
-	}
-
-	public void setListreceived(List<Courrier> listreceived) {
-		this.listreceived = listreceived;
-	}
-
-	public PieChartModel getPieModel1() {
-		return this.pieModel1;
-	}
-
+	
 	@PostConstruct
 	public void  init(){
 		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		listcourriers = new ArrayList<>() ; 
 		listSent = new ArrayList<>() ; 
 		listreceived = new ArrayList<>() ;
+		listavalider = new ArrayList<>() ;
 		 createPieModels();
 		this.listcourriers=courrierService.getCourrierList() ; 
 		if(null!=req.getParameter("id"))
@@ -117,110 +84,14 @@ public class CourrierBean implements Serializable {
 			listreceived = getReceivedCourriers();
 		
 	}
-		
-	public List<Correspondent> getListcorrespendent() {
-		return listcorrespendent;
-	}
-
-	public void setListcorrespendent(List<Correspondent> listcorrespendent) {
-		this.listcorrespendent = listcorrespendent;
-	}
-
-	private String courrierId;
-
-	public String getCourrierId() {
-		return courrierId;
-	}
-
-	public void setCourrierId(String courrierId) {
-		this.courrierId = courrierId;
-	}
-
-	public String getDetail() {
-		return detail;
-	}
-
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-	public byte getEtat() {
-		return etat;
-	}
-
-	public void setEtat(byte etat) {
-		this.etat = etat;
-	}
-
-	public String getObjetCourrier() {
-		return objetCourrier;
-	}
-
-	public void setObjetCourrier(String objetCourrier) {
-		this.objetCourrier = objetCourrier;
-	}
-
-	public byte getSense() {
-		return sense;
-	}
-
-	public void setSense(byte sense) {
-		this.sense = sense;
-	}
-
-	public String getTypeCourrier() {
-		return typeCourrier;
-	}
-
-	public void setTypeCourrier(String typeCourrier) {
-		this.typeCourrier = typeCourrier;
-	}
-
-	public List<Attachement> getAttachements() {
-		return attachements;
-	}
-
-	public void setAttachements(List<Attachement> attachements) {
-		this.attachements = attachements;
-	}
-
-	public Correspondent getCorrespondent() {
-		return correspondent;
-	}
-
-	public void setCorrespondent(Correspondent correspondent) {
-		this.correspondent = correspondent;
-	}
 	
-	public String getSelectedSender() {
-		return selectedSender;
-	}
 
-	public void setSelectedSender(String selectedSender) {
-		this.selectedSender = selectedSender;
-	}
-
-	private String detail;
-	private byte etat;
-	private String objetCourrier;
-	private byte sense;
-	private String typeCourrier;
-	private List<Attachement> attachements;
-	private Correspondent correspondent;
-	private Correspondent sender;
-
-	public Courrier getCr() {
-		return cr;
-	}
-
-	public void setCr(Courrier cr) {
-		this.cr = cr;
-	}
-
+	
+	/**CRUD**/
 	public void saveCourrier(ActionEvent actionEvent) {
 		
 		Correspondent c = correspondentService.getCorrespondent(selectedValue);
-		cr.setCourrierId("1e11e");
+		cr.setCourrierId("1courrier");
 		cr.setAttachements(null);
 		cr.setCorrespondent(c);
 		cr.setSender(selectedSender);
@@ -246,13 +117,7 @@ public class CourrierBean implements Serializable {
 		return listSent ;
 	}
 	
-	public Correspondent getSender() {
-		return sender;
-	}
-
-	public void setSender(Correspondent sender) {
-		this.sender = sender;
-	}
+	
 
 	public List<Courrier> getReceivedCourriers(){	
 		
@@ -267,18 +132,24 @@ public class CourrierBean implements Serializable {
 	}
 	
 	
+	public List<Courrier> getavaliderCourriers(){	
+		
+		for (Courrier cour:listcourriers) 
+		{
+			if (cour.getEtat()==false)
+			{
+				listavalider.add(cour);
+			}
+		}
+		return listavalider ;
+	}
+	
 	public String updateCourrier(String courrierId){
 		this.cr = courrierService.getCourrier(courrierId) ; 
 		return  "updateCourrier.xhtml?faces-redirect=true";
 	}
 
-	public List<Courrier> getListcourriers() {
-		return this.listcourriers;
-	}
-
-	public void setListcourriers(List<Courrier> listcourriers) {
-		this.listcourriers = listcourriers;
-	}
+	
 
 	public String updateCourrierPut(){
 		courrierService.updateCourrier(cr);
@@ -287,7 +158,7 @@ public class CourrierBean implements Serializable {
 		return  "ListCourrier.xhtml?faces-redirect=true";
 	}
 	
-	//Success
+
 		public void supprimerCourrier(String courrierId) {
 			try {
 				courrierService.deleteCourrier(courrierId);
@@ -297,13 +168,32 @@ public class CourrierBean implements Serializable {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		
+	
+		
+		public void validerCourrier(String courrierId) {
+			this.cr = courrierService.getCourrier(courrierId) ; 
+			cr.setEtat(true);
+			courrierService.saveCourrier(cr);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Le courrier  a été validé.", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			
+		}
+		
+		public void rechercheCourrier(ActionEvent actionEvent) {
+			
+			
+		}
+		
+		
 		public void refreshPage() throws IOException {
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 		}
-
 		
-		/******************Pie charts courriers by departement*********************/
+		/******************Pie charts*********************/
 		
 		public void createPieModels() {
 		        pieModel1 = new PieChartModel();
@@ -321,4 +211,163 @@ public class CourrierBean implements Serializable {
 			this.pieModel1 = pieModel1;
 		}
 		
+		
+		
+		
+		
+		/***getters & setters***/
+
+		public String getUserid() {
+			return userid;
+		}
+
+		public void setUserid(String userid) {
+			this.userid = userid;
+		}
+
+		public String getSelectedValue() {
+			return selectedValue;
+		}
+	 
+		public void setSelectedValue(String selectedValue) {
+			this.selectedValue = selectedValue;
+		}
+		public List<Courrier> getListSent() {
+			return listSent;
+		}
+
+		public void setListSent(List<Courrier> listSent) {
+			this.listSent = listSent;
+		}
+
+		public List<Courrier> getListreceived() {
+			return listreceived;
+		}
+
+		public void setListreceived(List<Courrier> listreceived) {
+			this.listreceived = listreceived;
+		}
+
+		public PieChartModel getPieModel1() {
+			return this.pieModel1;
+		}
+
+		
+		public List<Correspondent> getListcorrespendent() {
+			return listcorrespendent;
+		}
+
+		public void setListcorrespendent(List<Correspondent> listcorrespendent) {
+			this.listcorrespendent = listcorrespendent;
+		}
+
+		private String courrierId;
+
+		public String getCourrierId() {
+			return courrierId;
+		}
+
+		public void setCourrierId(String courrierId) {
+			this.courrierId = courrierId;
+		}
+
+		public String getDetail() {
+			return detail;
+		}
+
+		public void setDetail(String detail) {
+			this.detail = detail;
+		}
+
+		public byte getEtat() {
+			return etat;
+		}
+
+		public void setEtat(byte etat) {
+			this.etat = etat;
+		}
+
+		public String getObjetCourrier() {
+			return objetCourrier;
+		}
+
+		public void setObjetCourrier(String objetCourrier) {
+			this.objetCourrier = objetCourrier;
+		}
+
+		public byte getSense() {
+			return sense;
+		}
+
+		public void setSense(byte sense) {
+			this.sense = sense;
+		}
+
+		public String getTypeCourrier() {
+			return typeCourrier;
+		}
+
+		public void setTypeCourrier(String typeCourrier) {
+			this.typeCourrier = typeCourrier;
+		}
+
+		public List<Attachement> getAttachements() {
+			return attachements;
+		}
+
+		public void setAttachements(List<Attachement> attachements) {
+			this.attachements = attachements;
+		}
+
+		public Correspondent getCorrespondent() {
+			return correspondent;
+		}
+
+		public void setCorrespondent(Correspondent correspondent) {
+			this.correspondent = correspondent;
+		}
+		
+		public String getSelectedSender() {
+			return selectedSender;
+		}
+
+		public void setSelectedSender(String selectedSender) {
+			this.selectedSender = selectedSender;
+		}
+		
+		public Courrier getCr() {
+			return cr;
+		}
+
+		public void setCr(Courrier cr) {
+			this.cr = cr;
+		}
+		public Correspondent getSender() {
+			return sender;
+		}
+
+		public void setSender(Correspondent sender) {
+			this.sender = sender;
+		}
+		
+		public List<Courrier> getListcourriers() {
+			return this.listcourriers;
+		}
+
+		public void setListcourriers(List<Courrier> listcourriers) {
+			this.listcourriers = listcourriers;
+		}
+
+
+
+		public List<Courrier> getListavalider() {
+			return listavalider;
+		}
+
+
+
+		public void setListavalider(List<Courrier> listavalider) {
+			this.listavalider = listavalider;
+		}
+
 }

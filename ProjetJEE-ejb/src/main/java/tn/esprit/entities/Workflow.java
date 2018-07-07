@@ -3,7 +3,12 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+>>>>>>> add new things to courrier
 import java.util.List;
 
 
@@ -18,6 +23,7 @@ public class Workflow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@JsonProperty("WorkflowId")
 	private String workflowId;
 
 	//bi-directional many-to-many association to Department
@@ -31,9 +37,8 @@ public class Workflow implements Serializable {
 			@JoinColumn(name="Department_DepartementId")
 			}
 		)
+	@JsonProperty("Departments")
 	private List<Department> departments;
-
-
 
 
 	public Workflow() {

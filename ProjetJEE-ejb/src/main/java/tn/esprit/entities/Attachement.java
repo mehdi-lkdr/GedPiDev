@@ -3,6 +3,8 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the attachements database table.
@@ -15,21 +17,22 @@ public class Attachement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty("AttachementId")
 	private String attachementId;
-
+	
+	@JsonProperty("NomFichier")
 	@Column(length = 255)
 	private String nomFichier;
 
+	@JsonProperty("UrlFichier")
 	@Column(length = 255)
 	private String urlFichier;
 
 	//bi-directional many-to-one association to Courrier
 	@ManyToOne
 	@JoinColumn(name="CourrierId")
+	@JsonProperty("Courrier")
 	private Courrier courrier;
-
-
 
 	public Attachement() {
 	}

@@ -2,6 +2,9 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -16,18 +19,21 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-
+	@JsonProperty("DepartementId")
 	private String departementId;
 
 	@Column(length = 255)
+	@JsonProperty("Email")
 	private String email;
 
 	@Column(length = 255)
+	@JsonProperty("NomDepartement")
 	private String nomDepartement;
 
 	@Column(length = 255)
+	@JsonProperty("Responsable")
 	private String responsable;
-
+	@JsonProperty("Telephone")
 	private int telephone;
 	
 	@Transient

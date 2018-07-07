@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the documents database table.
@@ -17,23 +19,22 @@ public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	
 	private String documentId;
-
+	@JsonProperty("CurrentStat")	
 	private int currentStat;
-
+	@JsonProperty("DateCreation")
 	@Column(length = 255)
 	private String dateCreation;
-	
 	
 	@Column(length = 255)
 	private String documentCore;
 
-	private byte etat;
 
+	private byte etat;
+	@JsonProperty("NomDocument")
 	@Column(length = 255)
 	private String nomDocument;
-
+	@JsonProperty("WorkflowId")
 	@Column(length = 255)
 	private String workflowId;
 

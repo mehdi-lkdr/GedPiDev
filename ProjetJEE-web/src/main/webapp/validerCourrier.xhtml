@@ -1,30 +1,28 @@
 <h:html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-        xmlns:cc="http://java.sun.com/jsf/composite">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
 <h:head>
-
 </h:head>
 <h:body>
 	<ui:composition template="template/layout.xhtml">
 		<ui:define name="title">List Courriers</ui:define>
 		<ui:define name="main">
-
-		
-		
-		
 			<div class="header-info">
 				<h1 class="header-title">
-					<strong>Liste </strong>des courriers reçus
+					<strong>Liste des courriers à valider </strong>
 				</h1>
 			</div>
-			<div class="code-preview">
+				<div class="code-preview">
                     <div class="flexbox flex-justified">
                       <span>Priorité : <span class="badge badge-xl badge-dot bg-pale-danger"></span> Haute <span class="badge badge-xl badge-dot bg-pale-brown"></span> Normale <span class="badge badge-xl badge-dot badge-secondary"></span> Basse</span>
                       <span></span>
-                      <span><h:form><h:commandButton class="btn btn-w-md btn-flat btn-danger" action="#{Courrier.getReceivedCourriers}" value="Reset Filter" /></h:form></span>
+                      <span><h:form><h:commandButton class="btn btn-w-md btn-flat btn-danger" action="#{Courrier.avaliderCourriers}" value="Reset Filter" /></h:form></span>
                       <!--<span>
                       <label class="switch switch-border switch-info">
                         <span>En Cours </span>
@@ -79,6 +77,7 @@
 
 				</div>
 			</center>
+			
 		</ui:define>
 	</ui:composition>
 </h:body>
