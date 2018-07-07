@@ -34,7 +34,9 @@
 					<div class="form-group">
 						<label for="input-normal">Attachement</label>
 						<div class="form-group">
-							
+							 <h:inputFile>
+       				
+    					</h:inputFile>
 						</div>
 					</div>
 					
@@ -73,6 +75,23 @@
 						</div>
 					</div>
 					
+					<div class="form-group">
+						<label for="input-normal">Correspondent</label>
+						<div class="form-group">
+						
+						
+						
+						
+					<h:selectOneMenu value="#{Courrier.selectedSender}"  class="form-control w-300px"> 
+					 <f:selectItems  value="#{Courrier.listcorrespendent}" var="tag"
+                                  itemLabel="#{tag.nomCorrespondant}" itemValue="#{tag.correspondentId}"/>  
+					
+						</h:selectOneMenu> 	
+							
+								
+						
+						</div>
+					</div>
 						<div class="form-group">
 						<label for="input-normal">Objet</label>
 						<div class="form-group">

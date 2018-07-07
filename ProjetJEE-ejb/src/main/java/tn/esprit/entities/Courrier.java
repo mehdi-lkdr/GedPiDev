@@ -51,6 +51,17 @@ public class Courrier implements Serializable {
 	@JoinColumn(name="CorrespondentId")
 	@JsonProperty("Correspondent")
 	private Correspondent correspondent;
+	
+	
+	private String sender;
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 
 	public Courrier() {
 	}
