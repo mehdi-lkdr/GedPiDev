@@ -1,15 +1,17 @@
 package tn.esprit.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-<<<<<<< HEAD
-import java.util.HashMap;
-=======
-import com.fasterxml.jackson.annotation.JsonProperty;
-
->>>>>>> add new things to courrier
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -59,7 +61,5 @@ public class Workflow implements Serializable {
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}
-
-
 
 }

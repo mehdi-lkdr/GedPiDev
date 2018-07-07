@@ -17,16 +17,13 @@ public class Aspnetuserclaim implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@JsonProperty("Id")
+
 	private int id;
 
-	@Column(length = 255)
-	@JsonProperty("ClaimType")
+	
 	private String claimType;
 
-	@Column(length = 255)
-	@JsonProperty("ClaimValue")
+	
 	private String claimValue;
 
 	//bi-directional many-to-one association to Aspnetuser

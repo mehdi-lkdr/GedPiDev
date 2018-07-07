@@ -9,16 +9,12 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 
-import tn.esprit.Service.AddressService;
 import tn.esprit.Service.CorrespondentServicelocal;
-import tn.esprit.entities.Adress;
 import tn.esprit.entities.Correspondent;
 
 
@@ -33,7 +29,7 @@ public class CorrespondentBean implements Serializable{
 	
 	private Correspondent c = new Correspondent() ; 
 	
-	private Adress adress = new Adress() ; 
+
 
 
 	
@@ -41,8 +37,7 @@ public class CorrespondentBean implements Serializable{
 	@EJB
 	CorrespondentServicelocal correspondentServicelocal ; 
 	
-	@EJB(beanName="AddressServiceImpl")
-	AddressService adresseService ;
+
 	
 	
 
@@ -89,16 +84,7 @@ public class CorrespondentBean implements Serializable{
 	}
 
 
-	public Adress getAdress() {
-		return adress;
-	}
-
-
-
-	public void setAdress(Adress adress) {
-		this.adress = adress;
-	}
-
+	
 
 
 	public void setC(Correspondent c) {
@@ -210,9 +196,7 @@ public class CorrespondentBean implements Serializable{
 	
 	public void saveCorresp(ActionEvent actionEvent){	
 		
-		adress.setAdresseId("3");
 
-		c.setAdress(adress);
 	
 		correspondentServicelocal.saveCorrespondent(c);
 

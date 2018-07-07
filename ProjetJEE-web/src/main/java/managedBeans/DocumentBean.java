@@ -66,7 +66,6 @@ public class DocumentBean  implements Serializable{
 		departementList = departementServiceLocal.getDepartementList() ; 
 		
 	
-				doc.setDepartementList(departementList);
 				if(null!=req.getParameter("id"))
 			updatePageDocument(req.getParameter("id"));
 	}
@@ -77,17 +76,17 @@ public class DocumentBean  implements Serializable{
 	
 public void saveDocument (ActionEvent actionEvent){	
 		
-	doc.setAspnetuser(null);
-	doc.setAttachement(null);
+
+	
 	// doc.setWorkflow(null);
 	List<Department> deptList = new ArrayList<>() ; 
 	
 	Workflow workflow = new Workflow(); 
 	workflow.setWorkflowId("2");
 	HashMap<Integer, Department> dataMap = new HashMap<Integer, Department>();
-	
-	
-	for (Department department : doc.getDepartementList()) {
+	 
+	 
+	for (Department department : departementList) {
 				dataMap.put(department.getOrder(), department)   ;
 	}
 	
@@ -98,7 +97,7 @@ public void saveDocument (ActionEvent actionEvent){
 	}
 	
 	workflow.setDepartments(deptList);
-	doc.setWorkflow(workflow);
+	//doc.setWorkflow(workflow);
 			documentServiceLocal.saveDocument(doc);
 
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Document Ajouté Avec Succés",

@@ -19,32 +19,27 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@JsonProperty("DepartementId")
+
 	private String departementId;
 
-	@Column(length = 255)
-	@JsonProperty("Email")
+	
 	private String email;
 
-	@Column(length = 255)
-	@JsonProperty("NomDepartement")
+	
 	private String nomDepartement;
 
-	@Column(length = 255)
-	@JsonProperty("Responsable")
+	
 	private String responsable;
 	@JsonProperty("Telephone")
 	private int telephone;
-	
 	@Transient
-	private int order ; 
-
+	private Integer order ; 
 	//bi-directional many-to-one association to Aspnetuser
-	@OneToMany(mappedBy="department", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="department")
 	private List<Aspnetuser> aspnetusers;
 
 	//bi-directional many-to-many association to Workflow
-	@ManyToMany(mappedBy="departments", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="departments")
 	private List<Workflow> workflows;
 
 	public Department() {
@@ -120,15 +115,12 @@ public class Department implements Serializable {
 		this.workflows = workflows;
 	}
 
-	public int getOrder() {
+	public Integer getOrder() {
 		return order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(Integer order) {
 		this.order = order;
 	}
-	
-	
-	
 
 }

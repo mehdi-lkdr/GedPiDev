@@ -1,8 +1,6 @@
 package tn.esprit.entities;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,53 +18,36 @@ public class Document implements Serializable {
 
 	@Id
 	private String documentId;
-	@JsonProperty("CurrentStat")	
-	private int currentStat;
-	@JsonProperty("DateCreation")
-	@Column(length = 255)
-	private String dateCreation;
+
 	
-	@Column(length = 255)
+	private String creationUser;
+
+	private int currentStat;
+
+	
+	private String dateCreation;
+
+	
 	private String documentCore;
 
+	private Boolean etat;
 
-	private byte etat;
-	@JsonProperty("NomDocument")
-	@Column(length = 255)
+	
 	private String nomDocument;
-	@JsonProperty("WorkflowId")
-	@Column(length = 255)
+
+	
+	private String udateUser;
+
+	
+	private String updateDate;
+
+	
 	private String workflowId;
 
-	//bi-directional many-to-one association to Aspnetuser
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="ApplicationUserId")
-	private Aspnetuser aspnetuser;
-
 	//bi-directional one-to-one association to Attachement
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name="DocumentId")
 	private Attachement attachement;
-
-	//bi-directional one-to-one association to Workflow
-	@OneToOne( cascade = CascadeType.ALL)
-	private Workflow workflow;
-	
-	@Transient
-	private List<Department> departementList ; 
-
-	
-	
-	
-	
-
-
-	public List<Department> getDepartementList() {
-		return departementList;
-	}
-
-	public void setDepartementList(List<Department> departementList) {
-		this.departementList = departementList;
-	}
 
 	public Document() {
 	}
@@ -77,6 +58,14 @@ public class Document implements Serializable {
 
 	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
+	}
+
+	public String getCreationUser() {
+		return this.creationUser;
+	}
+
+	public void setCreationUser(String creationUser) {
+		this.creationUser = creationUser;
 	}
 
 	public int getCurrentStat() {
@@ -95,11 +84,19 @@ public class Document implements Serializable {
 		this.dateCreation = dateCreation;
 	}
 
-	public byte getEtat() {
+	public String getDocumentCore() {
+		return this.documentCore;
+	}
+
+	public void setDocumentCore(String documentCore) {
+		this.documentCore = documentCore;
+	}
+
+	public Boolean getEtat() {
 		return this.etat;
 	}
 
-	public void setEtat(byte etat) {
+	public void setEtat(Boolean etat) {
 		this.etat = etat;
 	}
 
@@ -111,20 +108,28 @@ public class Document implements Serializable {
 		this.nomDocument = nomDocument;
 	}
 
+	public String getUdateUser() {
+		return this.udateUser;
+	}
+
+	public void setUdateUser(String udateUser) {
+		this.udateUser = udateUser;
+	}
+
+	public String getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 	public String getWorkflowId() {
 		return this.workflowId;
 	}
 
 	public void setWorkflowId(String workflowId) {
 		this.workflowId = workflowId;
-	}
-
-	public Aspnetuser getAspnetuser() {
-		return this.aspnetuser;
-	}
-
-	public void setAspnetuser(Aspnetuser aspnetuser) {
-		this.aspnetuser = aspnetuser;
 	}
 
 	public Attachement getAttachement() {
@@ -134,24 +139,5 @@ public class Document implements Serializable {
 	public void setAttachement(Attachement attachement) {
 		this.attachement = attachement;
 	}
-
-	public Workflow getWorkflow() {
-		return this.workflow;
-	}
-
-	public void setWorkflow(Workflow workflow) {
-		this.workflow = workflow;
-	}
-
-	public String getDocumentCore() {
-		return documentCore;
-	}
-
-	public void setDocumentCore(String documentCore) {
-		this.documentCore = documentCore;
-	}
-	
-	
-	
 
 }

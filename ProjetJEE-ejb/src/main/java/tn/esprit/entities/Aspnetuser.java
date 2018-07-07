@@ -20,8 +20,6 @@ public class Aspnetuser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@JsonProperty("Id")
 	private String id;
 	@JsonProperty("AccessFailedCount")
 	private int accessFailedCount;
@@ -29,28 +27,30 @@ public class Aspnetuser implements Serializable {
 	private int departmentId;
 	@JsonProperty("Email")
 	private String email;
-	@JsonProperty("EmailConfirmed")
-	private Boolean emailConfirmed;
-	@JsonProperty("LockoutEnabled")
+
+	private byte emailConfirmed;
+
+	
+	private String firstName;
+
+	
+	private String lastName;
+
 	private Boolean lockoutEnabled;
-	@JsonProperty("LockoutEndDateUtc")
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lockoutEndDateUtc;
-	@JsonProperty("FirstName")
-	private String firstName ;
-	@JsonProperty("LastName")
-	private String lastName;
-	@JsonProperty("PasswordHash")
-	@Column(length = 255)
-	private String passwordHash;
-	@JsonProperty("PhoneNumber")
-	@Column(length = 255)
-	private String phoneNumber;
-	@JsonProperty("PhoneNumberConfirmed")
-	private Boolean phoneNumberConfirmed;
 
-	@JsonProperty("SecurityStamp")
-	@Column(length = 255)
+	
+	private String passwordHash;
+
+	private String phoneNumber;
+
+
+
+	private byte phoneNumberConfirmed;
+
+	
 	private String securityStamp;
 	@JsonProperty("TwoFactorEnabled")
 	private Boolean twoFactorEnabled;
@@ -85,125 +85,203 @@ public class Aspnetuser implements Serializable {
 	@ManyToOne
 	private Department department;
 
-	//bi-directional many-to-one association to Document
-	@JsonProperty("Documents")
-	@OneToMany(mappedBy="aspnetuser")
-	private List<Document> documents;
 
 	public Aspnetuser() {
 	}
 
+
+
 	public String getId() {
-		return this.id;
+		return id;
 	}
+
+
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
+
+
 	public int getAccessFailedCount() {
-		return this.accessFailedCount;
+		return accessFailedCount;
 	}
+
+
 
 	public void setAccessFailedCount(int accessFailedCount) {
 		this.accessFailedCount = accessFailedCount;
 	}
 
+
+
 	public int getDepartmentId() {
-		return this.departmentId;
+		return departmentId;
 	}
+
+
 
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
 
+
+
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
+
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public Boolean getEmailConfirmed() {
-		return this.emailConfirmed;
+
+
+	public byte getEmailConfirmed() {
+		return emailConfirmed;
 	}
 
-	public void setEmailConfirmed(Boolean emailConfirmed) {
+
+
+	public void setEmailConfirmed(byte emailConfirmed) {
 		this.emailConfirmed = emailConfirmed;
 	}
 
-	public Boolean getLockoutEnabled() {
-		return this.lockoutEnabled;
+
+
+	public String getFirstName() {
+		return firstName;
 	}
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
+	public Boolean getLockoutEnabled() {
+		return lockoutEnabled;
+	}
+
+
 
 	public void setLockoutEnabled(Boolean lockoutEnabled) {
 		this.lockoutEnabled = lockoutEnabled;
 	}
 
+
+
 	public Date getLockoutEndDateUtc() {
-		return this.lockoutEndDateUtc;
+		return lockoutEndDateUtc;
 	}
+
+
 
 	public void setLockoutEndDateUtc(Date lockoutEndDateUtc) {
 		this.lockoutEndDateUtc = lockoutEndDateUtc;
 	}
 
+
+
 	public String getPasswordHash() {
-		return this.passwordHash;
+		return passwordHash;
 	}
+
+
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
 
+
+
 	public String getPhoneNumber() {
-		return this.phoneNumber;
+		return phoneNumber;
 	}
+
+
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Boolean getPhoneNumberConfirmed() {
-		return this.phoneNumberConfirmed;
+
+
+	public byte getPhoneNumberConfirmed() {
+		return phoneNumberConfirmed;
 	}
 
-	public void setPhoneNumberConfirmed(Boolean phoneNumberConfirmed) {
+
+
+	public void setPhoneNumberConfirmed(byte phoneNumberConfirmed) {
 		this.phoneNumberConfirmed = phoneNumberConfirmed;
 	}
 
+
+
 	public String getSecurityStamp() {
-		return this.securityStamp;
+		return securityStamp;
 	}
+
+
 
 	public void setSecurityStamp(String securityStamp) {
 		this.securityStamp = securityStamp;
 	}
 
+
+
 	public Boolean getTwoFactorEnabled() {
-		return this.twoFactorEnabled;
+		return twoFactorEnabled;
 	}
+
+
 
 	public void setTwoFactorEnabled(Boolean twoFactorEnabled) {
 		this.twoFactorEnabled = twoFactorEnabled;
 	}
 
+
+
 	public String getUserName() {
-		return this.userName;
+		return userName;
 	}
+
+
 
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+
+
 	public List<Aspnetuserclaim> getAspnetuserclaims() {
-		return this.aspnetuserclaims;
+		return aspnetuserclaims;
 	}
+
+
 
 	public void setAspnetuserclaims(List<Aspnetuserclaim> aspnetuserclaims) {
 		this.aspnetuserclaims = aspnetuserclaims;
 	}
+
+
 
 	public Aspnetuserclaim addAspnetuserclaim(Aspnetuserclaim aspnetuserclaim) {
 		getAspnetuserclaims().add(aspnetuserclaim);
@@ -256,28 +334,5 @@ public class Aspnetuser implements Serializable {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-
-	public List<Document> getDocuments() {
-		return this.documents;
-	}
-
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
-	}
-
-	public Document addDocument(Document document) {
-		getDocuments().add(document);
-		document.setAspnetuser(this);
-
-		return document;
-	}
-
-	public Document removeDocument(Document document) {
-		getDocuments().remove(document);
-		document.setAspnetuser(null);
-
-		return document;
-	}
-	
 
 }

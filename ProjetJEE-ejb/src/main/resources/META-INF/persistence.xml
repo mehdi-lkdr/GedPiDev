@@ -2,7 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="ProjetJEE-ejb">
 		<jta-data-source>java:jboss/datasources/DefaultDS</jta-data-source>
-		<class>tn.esprit.entities.Adress</class>
 		<class>tn.esprit.entities.Aspnetrole</class>
 		<class>tn.esprit.entities.Aspnetuserclaim</class>
 		<class>tn.esprit.entities.Aspnetuserlogin</class>
@@ -14,6 +13,8 @@
 		<class>tn.esprit.entities.Department</class>
 		<class>tn.esprit.entities.Document</class>
 		<class>tn.esprit.entities.Workflow</class>
+
+
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="" value=""/>

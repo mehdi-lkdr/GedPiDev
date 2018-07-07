@@ -18,25 +18,35 @@ public class Correspondent implements Serializable {
 	@Id
 	private String correspondentId;
 
-	@Column(length = 255)
-	private String adressId;
+	
+	private String adresseId;
 
-	@Column(length = 255)
+	private int codePostal;
+
+	
 	private String email;
 
 	private int fax;
 
-	@Column(length = 255)
+	
 	private String nomCorrespondant;
+
+	
+	private String pays;
+
+	
+	private String rue;
 
 	private int telephone;
 
-	//bi-directional one-to-one association to Adress
-	@OneToOne(cascade =CascadeType.ALL)
-	private Adress adress;
+	
+	private String userId;
+
+	
+	private String ville;
 
 	//bi-directional many-to-one association to Courrier
-	@OneToMany(mappedBy="correspondent",cascade =CascadeType.ALL)
+	@OneToMany(mappedBy="correspondent")
 	private List<Courrier> courriers;
 
 	public Correspondent() {
@@ -51,11 +61,19 @@ public class Correspondent implements Serializable {
 	}
 
 	public String getAdresseId() {
-		return this.adressId;
+		return this.adresseId;
 	}
 
 	public void setAdresseId(String adresseId) {
-		this.adressId = adresseId;
+		this.adresseId = adresseId;
+	}
+
+	public int getCodePostal() {
+		return this.codePostal;
+	}
+
+	public void setCodePostal(int codePostal) {
+		this.codePostal = codePostal;
 	}
 
 	public String getEmail() {
@@ -82,6 +100,22 @@ public class Correspondent implements Serializable {
 		this.nomCorrespondant = nomCorrespondant;
 	}
 
+	public String getPays() {
+		return this.pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	public String getRue() {
+		return this.rue;
+	}
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
 	public int getTelephone() {
 		return this.telephone;
 	}
@@ -90,12 +124,20 @@ public class Correspondent implements Serializable {
 		this.telephone = telephone;
 	}
 
-	public Adress getAdress() {
-		return this.adress;
+	public String getUserId() {
+		return this.userId;
 	}
 
-	public void setAdress(Adress adress) {
-		this.adress = adress;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getVille() {
+		return this.ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
 	}
 
 	public List<Courrier> getCourriers() {
