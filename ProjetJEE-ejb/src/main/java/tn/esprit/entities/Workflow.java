@@ -23,7 +23,7 @@ public class Workflow implements Serializable {
 	private String workflowId;
 
 	//bi-directional many-to-many association to Department
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="workflowdepartments"
 		, joinColumns={

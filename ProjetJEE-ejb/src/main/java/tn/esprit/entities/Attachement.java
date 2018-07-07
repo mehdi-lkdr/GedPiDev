@@ -32,11 +32,6 @@ public class Attachement implements Serializable {
 	@JsonProperty("Courrier")
 	private Courrier courrier;
 
-	//bi-directional one-to-one association to Document
-	@OneToOne(mappedBy="attachement")
-	@JsonProperty("Document")
-	private Document document;
-
 	public Attachement() {
 	}
 
@@ -72,12 +67,5 @@ public class Attachement implements Serializable {
 		this.courrier = courrier;
 	}
 
-	public Document getDocument() {
-		return this.document;
-	}
-
-	public void setDocument(Document document) {
-		this.document = document;
-	}
 
 }

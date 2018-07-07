@@ -45,10 +45,7 @@ public class Document implements Serializable {
 	@JsonProperty("WorkflowId")
 	private String workflowId;
 
-	//bi-directional one-to-one association to Attachement
-	@OneToOne
-	@JoinColumn(name="DocumentId")
-	private Attachement attachement;
+
 
 	public Document() {
 	}
@@ -133,12 +130,5 @@ public class Document implements Serializable {
 		this.workflowId = workflowId;
 	}
 
-	public Attachement getAttachement() {
-		return this.attachement;
-	}
-
-	public void setAttachement(Attachement attachement) {
-		this.attachement = attachement;
-	}
 
 }

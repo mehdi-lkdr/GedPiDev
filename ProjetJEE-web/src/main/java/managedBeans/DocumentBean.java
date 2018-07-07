@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import tn.esprit.Service.DepartementServiceLocal;
 import tn.esprit.Service.DocumentServiceLocal;
+import tn.esprit.Service.WorkFlowServiceLocal;
 import tn.esprit.entities.Department;
 import tn.esprit.entities.Document;
 import tn.esprit.entities.Workflow;
@@ -50,9 +51,16 @@ public class DocumentBean  implements Serializable{
 	DepartementServiceLocal departementServiceLocal ; 
 	
 	
+	@EJB
+	WorkFlowServiceLocal workFlowServiceLocal ; 
+	
+	
 	private Document doc = new Document() ; 
 	
 	private List<Department> departementList ; 
+	
+	
+	private Workflow wf = new Workflow() ; 
 	
 	
 
@@ -82,7 +90,7 @@ public void saveDocument (ActionEvent actionEvent){
 	List<Department> deptList = new ArrayList<>() ; 
 	
 	Workflow workflow = new Workflow(); 
-	workflow.setWorkflowId("2");
+	workflow.setWorkflowId("7");
 	HashMap<Integer, Department> dataMap = new HashMap<Integer, Department>();
 	 
 	 
@@ -97,7 +105,11 @@ public void saveDocument (ActionEvent actionEvent){
 	}
 	
 	workflow.setDepartments(deptList);
-	//doc.setWorkflow(workflow);
+	workFlowServiceLocal.saveWorkFlow(workflow);
+	
+
+	doc.setWorkflowId(workflow.getWorkflowId());
+	doc.setEtat(false);
 			documentServiceLocal.saveDocument(doc);
 
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Document Ajouté Avec Succés",
@@ -123,7 +135,12 @@ public Document getDocument(String  document){
 	}
 	
 	public String updateDocument(){
-		documentServiceLocal.updateDocument(doc);;
+		
+		
+		doc.setEtat(false);
+		
+		
+		documentServiceLocal.updateDocument(doc);
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Document Updated Avec Succés",
 				null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
@@ -152,7 +169,13 @@ public Document getDocument(String  document){
 	public String updatePageDocument(String  correspondent){	
 		
 		this.doc=  documentServiceLocal.getDocument(correspondent);
-
+		this.wf = workFlowServiceLocal.getWorkFlow(doc.getWorkflowId());
+		
+		for(int i = 0 ; i< wf.getDepartments().size()   ; i++){
+			
+			wf.getDepartments().get(i).setOrder(i+1);
+			
+		}
 	
 		return "/updateDocument.xhtml?faces-redirect=true";
 	}
@@ -251,6 +274,22 @@ public Document getDocument(String  document){
 
 	public void setDepartementList(List<Department> departementList) {
 		this.departementList = departementList;
+	}
+
+
+
+
+
+	public Workflow getWf() {
+		return wf;
+	}
+
+
+
+
+
+	public void setWf(Workflow wf) {
+		this.wf = wf;
 	}
 
 

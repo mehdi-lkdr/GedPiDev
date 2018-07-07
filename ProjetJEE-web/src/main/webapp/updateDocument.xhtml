@@ -22,12 +22,105 @@
 							</thead>
 							<tbody>
 								<h:form>
-									<tr class="bg-pale-secondary"><td>ID Document</td> <td><h:inputText class="form-control" value="#{Document.doc.documentId}"  /></td></tr>
-										<tr ><td>Nom Document</td><td><h:inputText class="form-control" value="#{Document.doc.nomDocument}"  /></td></tr>
-										<tr ><td>Date De Creation </td> <td> <h:inputText class="form-control" value="#{Document.doc.dateCreation}"/> </td> </tr>
-									<tr> <td>Document Core </td><td><h:inputTextarea cols="30" rows="10" class="form-control w-300px" pt:type="text" value="#{Document.doc.}"> </h:inputTextarea></td> </tr>
+								
+								
+								
+								
+								
+								<div class="col-md-12">
+								<div class="row">
+			<div class="col-md-4">
+				
+				<p:growl id="growl" life="2000" />
+					
+					
+				<div class="form-group">
+						<label for="input-normal">Document Id</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.documentId}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input-normal">Document Name</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.nomDocument}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input-normal">Date de Creation</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.dateCreation}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+						<div class="form-group">
+						<label for="input-normal">Document Core</label>
+						<div class="form-group">
+							
+							
+							<h:inputTextarea cols="30" rows="10" class="form-control w-300px" pt:type="text" value="#{Document.doc.documentCore}"> </h:inputTextarea>
+							<h:inputHidden   value="#{Document.doc.workflowId}"> </h:inputHidden >
+						</div>
+					</div>
+					
+					
+					
+
+					
+					<br />
+					<h:commandButton update="growl" actionListener="#{Document.updateDocument()}"
+						class="btn btn-w-md btn-round btn-success" value="Submit" />
+							
+									
+				
+			</div>
+			<div class="col-md-4">
+			</div>
+	
+			<div class="col-md-4">
+		
+						<label for="input-normal">WorkFlow</label>
+						
+							<table class="table table-separated" >
+				
+							<tbody data-provide="sortable" data-sortable-handle=".sortable-dot" data-sortable-id="3" aria-dropeffect="move">
+								<ui:repeat var="departementList" value="#{Document.wf.departments}">
+								<tr >
+									
+									<th>
+									<h:inputText class="form-control w-300px" pt:type="text"  value="#{departementList.departementId}"  readonly="true" /></th>
+									<td><h:inputText class="form-control w-300px" pt:type="text"  value="#{departementList.order}" readonly="true" /></td>
+									
+									
 										
-										<tr class="bg-pale-secondary"><td></td><td><h:commandButton action="#{Document.updateDocument()}" class="btn btn-w-md btn-bold btn-info" value="Soumettre" /></td></tr>
+									
+										
+								</tr>
+								</ui:repeat>
+									</tbody>
+						</table>
+						
+				
+			
+			</div>
+			
+		
+			
+			</div>
+				</div>
+									
+									
+									
+									
+									
 									
 								</h:form>
 							</tbody>
