@@ -29,6 +29,9 @@ public class Department implements Serializable {
 	private String responsable;
 
 	private int telephone;
+	
+	@Transient
+	private int order ; 
 
 	//bi-directional many-to-one association to Aspnetuser
 	@OneToMany(mappedBy="department", cascade = CascadeType.ALL)
@@ -110,5 +113,16 @@ public class Department implements Serializable {
 	public void setWorkflows(List<Workflow> workflows) {
 		this.workflows = workflows;
 	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	
+	
+	
 
 }

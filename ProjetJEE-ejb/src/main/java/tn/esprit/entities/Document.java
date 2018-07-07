@@ -1,6 +1,8 @@
 package tn.esprit.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -15,13 +17,17 @@ public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private String documentId;
 
 	private int currentStat;
 
 	@Column(length = 255)
 	private String dateCreation;
+	
+	
+	@Column(length = 255)
+	private String documentCore;
 
 	private byte etat;
 
@@ -32,18 +38,34 @@ public class Document implements Serializable {
 	private String workflowId;
 
 	//bi-directional many-to-one association to Aspnetuser
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="ApplicationUserId")
 	private Aspnetuser aspnetuser;
 
 	//bi-directional one-to-one association to Attachement
-	@OneToOne
-	@JoinColumn(name="DocumentId")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Attachement attachement;
 
 	//bi-directional one-to-one association to Workflow
-	@OneToOne(mappedBy="document")
+	@OneToOne( cascade = CascadeType.ALL)
 	private Workflow workflow;
+	
+	@Transient
+	private List<Department> departementList ; 
+
+	
+	
+	
+	
+
+
+	public List<Department> getDepartementList() {
+		return departementList;
+	}
+
+	public void setDepartementList(List<Department> departementList) {
+		this.departementList = departementList;
+	}
 
 	public Document() {
 	}
@@ -119,5 +141,16 @@ public class Document implements Serializable {
 	public void setWorkflow(Workflow workflow) {
 		this.workflow = workflow;
 	}
+
+	public String getDocumentCore() {
+		return documentCore;
+	}
+
+	public void setDocumentCore(String documentCore) {
+		this.documentCore = documentCore;
+	}
+	
+	
+	
 
 }

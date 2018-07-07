@@ -10,7 +10,7 @@ import tn.esprit.entities.Adress;
 public interface AddressServiceRemote {
 
 	
-	public void saveAdresse(Adress adress) ; 
+	public String saveAdresse(Adress adress) ; 
 	public void updateAdresse(Adress adress) ; 
 	public void deleteAdresse(String adressId) ; 
 	public Adress getAdresseById(String idAdresse) throws Exception ; 

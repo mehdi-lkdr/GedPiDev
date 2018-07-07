@@ -13,8 +13,8 @@ public interface DocumentServiceRemote {
 	
 	public void saveDocument(Document doc) ; 
 	public void updateDocument(Document doc) ; 
-	public void deleteDocument(int docId) ; 
-	public Document getDocument(int docId) ; 
+	public void deleteDocument(String docId) ; 
+	public Document getDocument(String docId) ; 
 	public List<Document> getDocumentList() ; 
 
 }

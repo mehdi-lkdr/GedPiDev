@@ -13,10 +13,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 
+import tn.esprit.Service.AddressService;
 import tn.esprit.Service.CorrespondentServicelocal;
-
+import tn.esprit.entities.Adress;
 import tn.esprit.entities.Correspondent;
 
 
@@ -30,17 +32,24 @@ public class CorrespondentBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Correspondent c = new Correspondent() ; 
+	
+	private Adress adress = new Adress() ; 
 
 
 	
 	
 	@EJB
-	CorrespondentServicelocal correspondentServicelocal ;  
+	CorrespondentServicelocal correspondentServicelocal ; 
+	
+	@EJB(beanName="AddressServiceImpl")
+	AddressService adresseService ;
+	
+	
 
 	private String correspondentId;
 
 
-	private String adresseId;
+	
 
 	private String email;
 
@@ -80,6 +89,18 @@ public class CorrespondentBean implements Serializable{
 	}
 
 
+	public Adress getAdress() {
+		return adress;
+	}
+
+
+
+	public void setAdress(Adress adress) {
+		this.adress = adress;
+	}
+
+
+
 	public void setC(Correspondent c) {
 		this.c = c;
 	}
@@ -105,14 +126,6 @@ public class CorrespondentBean implements Serializable{
 	}
 
 
-	public String getAdresseId() {
-		return adresseId;
-	}
-
-
-	public void setAdresseId(String adresseId) {
-		this.adresseId = adresseId;
-	}
 
 
 	public String getEmail() {
@@ -197,8 +210,12 @@ public class CorrespondentBean implements Serializable{
 	
 	public void saveCorresp(ActionEvent actionEvent){	
 		
-		c.setCorrespondentId("aaaaaa");
+		adress.setAdresseId("3");
+
+		c.setAdress(adress);
+	
 		correspondentServicelocal.saveCorrespondent(c);
+
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correspondent Ajouté Avec Succés",
 				null);
 		FacesContext.getCurrentInstance().addMessage(null, message);

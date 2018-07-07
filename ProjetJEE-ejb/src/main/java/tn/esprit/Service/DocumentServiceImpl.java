@@ -31,13 +31,13 @@ public class DocumentServiceImpl implements DocumentServiceLocal , DocumentServi
 	}
 
 	@Override
-	public void deleteDocument(int docId) {
+	public void deleteDocument(String docId) {
 		// TODO Auto-generated method stub
 		em.remove(getDocument(docId));
 	}
 
 	@Override
-	public Document getDocument(int docId) {
+	public Document getDocument(String docId) {
 		// TODO Auto-generated method stub
 		return em.find(Document.class, docId);
 	}

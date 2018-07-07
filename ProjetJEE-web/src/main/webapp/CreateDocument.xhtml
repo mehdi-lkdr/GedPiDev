@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
+	
+<h:head>
+
+
+</h:head>
+<h:body>
+	<ui:composition template="template/layout.xhtml">
+		<ui:define name="title">Document</ui:define>
+		<ui:define name="main">
+			<div class="header-info">
+				<h1 class="header-title">
+					<strong>Créer</strong> Document
+				</h1>
+			</div>
+			<h:form>
+			<div class="row">
+			<div class="col-md-offset-6">
+				
+				<p:growl id="growl" life="2000" />
+					
+					
+				<div class="form-group">
+						<label for="input-normal">Document Id</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.documentId}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input-normal">Document Name</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.nomDocument}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input-normal">Date de Creation</label>
+						<div class="form-group">
+							<h:inputText class="form-control w-300px" pt:type="text" value="#{Document.doc.dateCreation}"  >
+								
+							</h:inputText>
+						</div>
+					</div>
+					
+						<div class="form-group">
+						<label for="input-normal">Document Core</label>
+						<div class="form-group">
+							
+							
+							<h:inputTextarea cols="30" rows="10" class="form-control w-300px" pt:type="text" value="#{Document.doc.documentCore}"> </h:inputTextarea>
+						</div>
+					</div>
+					
+					
+					
+
+					
+					<br />
+					<h:commandButton update="growl" actionListener="#{Document.saveDocument}"
+						class="btn btn-w-md btn-round btn-success" value="Submit" />
+				
+			</div>
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-offset-4">
+			
+			</div>
+			<div class="form-group">
+						<label for="input-normal">WorkFlow</label>
+						<div class="form-group">
+							<table class="table table-separated" >
+				
+							<tbody data-provide="sortable" data-sortable-handle=".sortable-dot" data-sortable-id="3" aria-dropeffect="move">
+								<ui:repeat var="departementList" value="#{Document.doc.departementList}">
+								<tr >
+									
+									<th>
+									<h:inputText class="form-control w-300px" pt:type="text"  value="#{departementList.departementId}"  /></th>
+									<td><h:inputText class="form-control w-300px" pt:type="text"  value="#{departementList.order}"  /></td>
+									
+									
+										
+									
+										
+								</tr>
+								</ui:repeat>
+									</tbody>
+						</table>
+						</div>
+					</div>
+			
+			
+			</div>
+			
+			</h:form>
+			
+			
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</h:html>

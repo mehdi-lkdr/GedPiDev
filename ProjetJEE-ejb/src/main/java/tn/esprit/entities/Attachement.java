@@ -29,9 +29,7 @@ public class Attachement implements Serializable {
 	@JoinColumn(name="CourrierId")
 	private Courrier courrier;
 
-	//bi-directional one-to-one association to Document
-	@OneToOne(mappedBy="attachement")
-	private Document document;
+
 
 	public Attachement() {
 	}
@@ -68,12 +66,6 @@ public class Attachement implements Serializable {
 		this.courrier = courrier;
 	}
 
-	public Document getDocument() {
-		return this.document;
-	}
 
-	public void setDocument(Document document) {
-		this.document = document;
-	}
 
 }

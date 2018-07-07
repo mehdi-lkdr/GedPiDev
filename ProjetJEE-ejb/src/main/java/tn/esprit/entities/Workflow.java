@@ -2,6 +2,8 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -16,7 +18,6 @@ public class Workflow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String workflowId;
 
 	//bi-directional many-to-many association to Department
@@ -32,10 +33,8 @@ public class Workflow implements Serializable {
 		)
 	private List<Department> departments;
 
-	//bi-directional one-to-one association to Document
-	@OneToOne
-	@JoinColumn(name="WorkflowId")
-	private Document document;
+
+
 
 	public Workflow() {
 	}
@@ -56,12 +55,6 @@ public class Workflow implements Serializable {
 		this.departments = departments;
 	}
 
-	public Document getDocument() {
-		return this.document;
-	}
 
-	public void setDocument(Document document) {
-		this.document = document;
-	}
 
 }

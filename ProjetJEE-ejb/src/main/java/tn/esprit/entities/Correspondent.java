@@ -19,7 +19,7 @@ public class Correspondent implements Serializable {
 	private String correspondentId;
 
 	@Column(length = 255)
-	private String adresseId;
+	private String adressId;
 
 	@Column(length = 255)
 	private String email;
@@ -32,7 +32,7 @@ public class Correspondent implements Serializable {
 	private int telephone;
 
 	//bi-directional one-to-one association to Adress
-	@OneToOne(mappedBy="correspondent")
+	@OneToOne(cascade =CascadeType.ALL)
 	private Adress adress;
 
 	//bi-directional many-to-one association to Courrier
@@ -51,11 +51,11 @@ public class Correspondent implements Serializable {
 	}
 
 	public String getAdresseId() {
-		return this.adresseId;
+		return this.adressId;
 	}
 
 	public void setAdresseId(String adresseId) {
-		this.adresseId = adresseId;
+		this.adressId = adresseId;
 	}
 
 	public String getEmail() {

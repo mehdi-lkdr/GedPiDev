@@ -35,11 +35,7 @@ public class Adress implements Serializable {
 	@Column(length = 255)
 	private String ville;
 	
-	//bi-directional one-to-one association to Correspondent
-	@JsonProperty
-	@OneToOne
-	@JoinColumn(name="AdresseId")
-	private Correspondent correspondent;
+
 
 	public Adress() {
 	}
@@ -84,13 +80,7 @@ public class Adress implements Serializable {
 		this.ville = ville;
 	}
 
-	public Correspondent getCorrespondent() {
-		return this.correspondent;
-	}
 
-	public void setCorrespondent(Correspondent correspondent) {
-		this.correspondent = correspondent;
-	}
 	@JsonCreator
 	public Adress(@JsonProperty("adresseId")String adresseId,@JsonProperty("codePostal") int codePostal,@JsonProperty("pays") String pays,
 			@JsonProperty("rue") String rue,@JsonProperty("ville") String ville,
@@ -101,7 +91,7 @@ public class Adress implements Serializable {
 		this.pays = pays;
 		this.rue = rue;
 		this.ville = ville;
-		this.correspondent = correspondent;
+
 	}
 	
 }

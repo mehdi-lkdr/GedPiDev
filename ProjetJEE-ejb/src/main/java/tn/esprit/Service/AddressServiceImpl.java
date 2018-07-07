@@ -26,9 +26,10 @@ public class AddressServiceImpl implements AddressService , AddressServiceRemote
 	
 	
 	@Override
-	public void saveAdresse(Adress adress) {
+	public String saveAdresse(Adress adress) {
 		// TODO Auto-generated method stub
 		em.persist(adress);
+		return adress.getAdresseId();
 	}
 
 	@Override
