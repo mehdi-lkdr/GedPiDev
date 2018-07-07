@@ -19,6 +19,8 @@ public class Aspnetrole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty("UserId")
 	private String id;
 	@JsonProperty("RoleId")
 	private String name;

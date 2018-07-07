@@ -1,17 +1,11 @@
 package tn.esprit.entities;
 
 import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 
 /**
@@ -25,7 +19,7 @@ public class Workflow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@JsonProperty("WorkflowId")
+	@JsonProperty("WorkflowIds")
 	private String workflowId;
 
 	//bi-directional many-to-many association to Department
@@ -39,9 +33,8 @@ public class Workflow implements Serializable {
 			@JoinColumn(name="Department_DepartementId")
 			}
 		)
-	@JsonProperty("Departments")
+	@JsonProperty("Steps")
 	private List<Department> departments;
-
 
 	public Workflow() {
 	}

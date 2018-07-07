@@ -2,6 +2,9 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -16,35 +19,39 @@ public class Correspondent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@JsonProperty("CorrespondentId")
 	private String correspondentId;
 
-	
+@JsonProperty("AdresseId")
 	private String adresseId;
 
+@JsonProperty("CodePostal")
 	private int codePostal;
 
-	
+	@JsonProperty("Email")
 	private String email;
-
+@JsonProperty("Fax")
 	private int fax;
 
-	
+	@JsonProperty("NomCorrespondant")
 	private String nomCorrespondant;
 
-	
+	@JsonProperty("Pays")
 	private String pays;
 
-	
+	@JsonProperty("Rue")
 	private String rue;
-
+	
+	@JsonProperty("Telephone")
 	private int telephone;
 
-	
+	@JsonProperty("UserId")
 	private String userId;
 
-	
+	@JsonProperty("Ville")
 	private String ville;
 
+	@JsonProperty("Courriers")
 	//bi-directional many-to-one association to Courrier
 	@OneToMany(mappedBy="correspondent")
 	private List<Courrier> courriers;

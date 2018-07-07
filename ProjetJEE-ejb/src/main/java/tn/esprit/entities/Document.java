@@ -17,31 +17,32 @@ public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@JsonProperty("DocumentId")
 	private String documentId;
 
-	
+	@JsonProperty("CreationUser")
 	private String creationUser;
-
+	@JsonProperty("CurrentStat")
 	private int currentStat;
 
-	
+	@JsonProperty("DateCreation")
 	private String dateCreation;
 
-	
+	@JsonProperty("DocumentCore")
 	private String documentCore;
-
+@JsonProperty("Etat")
 	private Boolean etat;
 
-	
+	@JsonProperty("NomDocument")
 	private String nomDocument;
 
-	
+	@JsonProperty("UdateUser")
 	private String udateUser;
 
-	
+	@JsonProperty("UpdateDate")
 	private String updateDate;
 
-	
+	@JsonProperty("WorkflowId")
 	private String workflowId;
 
 	//bi-directional one-to-one association to Attachement

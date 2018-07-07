@@ -17,13 +17,13 @@ public class Attachement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-
+	@JsonProperty("AttachementId")
 	private String attachementId;
 
-	
+	@JsonProperty("NomFichier")
 	private String nomFichier;
 
-
+	@JsonProperty("UrlFichier")
 	private String urlFichier;
 
 	//bi-directional many-to-one association to Courrier
@@ -32,9 +32,9 @@ public class Attachement implements Serializable {
 	@JsonProperty("Courrier")
 	private Courrier courrier;
 
-
 	//bi-directional one-to-one association to Document
 	@OneToOne(mappedBy="attachement")
+	@JsonProperty("Document")
 	private Document document;
 
 	public Attachement() {

@@ -19,26 +19,29 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-
+	@JsonProperty("DepartementId")
 	private String departementId;
 
-	
+	@JsonProperty("Email")
 	private String email;
 
-	
+	@JsonProperty("NomDepartement")
 	private String nomDepartement;
 
-	
+	@JsonProperty("Responsable")
 	private String responsable;
+	
 	@JsonProperty("Telephone")
 	private int telephone;
 	@Transient
 	private Integer order ; 
 	//bi-directional many-to-one association to Aspnetuser
 	@OneToMany(mappedBy="department")
+	@JsonProperty("Users")
 	private List<Aspnetuser> aspnetusers;
 
 	//bi-directional many-to-many association to Workflow
+	@JsonProperty("WorkFlows")
 	@ManyToMany(mappedBy="departments")
 	private List<Workflow> workflows;
 

@@ -2,6 +2,10 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -16,34 +20,64 @@ public class Courrier implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@JsonProperty("CourrierId")
 	private String courrierId;
 
-	
+	@Column(length = 255)
+	@JsonProperty("Detail")
 	private String detail;
-
-	private byte etat;
-
 	
+	@JsonProperty("Etat")
+	private boolean etat;
+
+	@Column(length = 255)
+	@JsonProperty("ObjetCourrier")
 	private String objetCourrier;
-
 	
-	private String sender;
+	@JsonProperty("Sense")
+	private boolean sense;
 
-	private byte sense;
-
-	
+	@Column(length = 255)
+	@JsonProperty("TypeCourrier")
 	private String typeCourrier;
 
 	//bi-directional many-to-one association to Attachement
-	@OneToMany(mappedBy="courrier")
+	@OneToMany(mappedBy="courrier",cascade =CascadeType.ALL)
+	@JsonProperty("Attachements")
 	private List<Attachement> attachements;
 
 	//bi-directional many-to-one association to Correspondent
 	@ManyToOne
 	@JoinColumn(name="CorrespondentId")
+	@JsonProperty("Correspondent")
 	private Correspondent correspondent;
+	
+	@JsonProperty("Sender")
+	private String sender;
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 
 	public Courrier() {
+	}
+	@JsonCreator
+	public Courrier(@JsonProperty("CourrierId") String courrierId,@JsonProperty("Detail") String detail,@JsonProperty("Etat") boolean etat,@JsonProperty("ObjetCourrier") String objetCourrier,
+			@JsonProperty("Sense") boolean sense,@JsonProperty("TypeCourrier") String typeCourrier,
+			@JsonProperty("Attachements")List<Attachement> attachements,@JsonProperty("CorrespondentId") Correspondent correspondent) {
+		super();
+		this.courrierId = courrierId;
+		this.detail = detail;
+		this.etat = etat;
+		this.objetCourrier = objetCourrier;
+		this.sense = sense;
+		this.typeCourrier = typeCourrier;
+		this.attachements = attachements;
+		this.correspondent = correspondent;
 	}
 
 	public String getCourrierId() {
@@ -62,11 +96,11 @@ public class Courrier implements Serializable {
 		this.detail = detail;
 	}
 
-	public byte getEtat() {
+	public boolean getEtat() {
 		return this.etat;
 	}
 
-	public void setEtat(byte etat) {
+	public void setEtat(boolean etat) {
 		this.etat = etat;
 	}
 
@@ -78,19 +112,11 @@ public class Courrier implements Serializable {
 		this.objetCourrier = objetCourrier;
 	}
 
-	public String getSender() {
-		return this.sender;
-	}
-
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-
-	public byte getSense() {
+	public boolean getSense() {
 		return this.sense;
 	}
 
-	public void setSense(byte sense) {
+	public void setSense(boolean sense) {
 		this.sense = sense;
 	}
 
