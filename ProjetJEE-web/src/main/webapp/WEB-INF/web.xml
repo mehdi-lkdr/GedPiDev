@@ -6,7 +6,7 @@
   
   
   <welcome-file-list>
-		<welcome-file>/template/login.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
   
   <servlet>

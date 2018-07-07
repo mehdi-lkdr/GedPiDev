@@ -3,6 +3,8 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the aspnetuserclaims database table.
@@ -16,17 +18,21 @@ public class Aspnetuserclaim implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty("Id")
 	private int id;
 
 	@Column(length = 255)
+	@JsonProperty("ClaimType")
 	private String claimType;
 
 	@Column(length = 255)
+	@JsonProperty("ClaimValue")
 	private String claimValue;
 
 	//bi-directional many-to-one association to Aspnetuser
 	@ManyToOne
 	@JoinColumn(name="UserId")
+	@JsonProperty("Aspnetuser")
 	private Aspnetuser aspnetuser;
 
 	public Aspnetuserclaim() {

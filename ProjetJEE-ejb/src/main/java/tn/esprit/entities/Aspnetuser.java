@@ -2,6 +2,9 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -18,45 +21,53 @@ public class Aspnetuser implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty("Id")
 	private String id;
-
+	@JsonProperty("AccessFailedCount")
 	private int accessFailedCount;
-
+	@JsonProperty("DepartmentId")
 	private int departmentId;
-
+	@JsonProperty("Email")
 	private String email;
-
-	private byte emailConfirmed;
-
-	private byte lockoutEnabled;
-
+	@JsonProperty("EmailConfirmed")
+	private Boolean emailConfirmed;
+	@JsonProperty("LockoutEnabled")
+	private Boolean lockoutEnabled;
+	@JsonProperty("LockoutEndDateUtc")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lockoutEndDateUtc;
-
+	@JsonProperty("FirstName")
+	private String firstName ;
+	@JsonProperty("LastName")
+	private String lastName;
+	@JsonProperty("PasswordHash")
 	@Column(length = 255)
 	private String passwordHash;
-
+	@JsonProperty("PhoneNumber")
 	@Column(length = 255)
 	private String phoneNumber;
+	@JsonProperty("PhoneNumberConfirmed")
+	private Boolean phoneNumberConfirmed;
 
-	private byte phoneNumberConfirmed;
-
+	@JsonProperty("SecurityStamp")
 	@Column(length = 255)
 	private String securityStamp;
-
-	private byte twoFactorEnabled;
-
+	@JsonProperty("TwoFactorEnabled")
+	private Boolean twoFactorEnabled;
+	@JsonProperty("UserName")
 	private String userName;
 
+	@JsonProperty("Claims")
 	//bi-directional many-to-one association to Aspnetuserclaim
 	@OneToMany(mappedBy="aspnetuser")
 	private List<Aspnetuserclaim> aspnetuserclaims;
-
+	@JsonProperty("Logins")
 	//bi-directional many-to-one association to Aspnetuserlogin
 	@OneToMany(mappedBy="aspnetuser")
 	private List<Aspnetuserlogin> aspnetuserlogins;
 
 	//bi-directional many-to-many association to Aspnetrole
+	@JsonProperty("Roles")
 	@ManyToMany
 	@JoinTable(
 		name="aspnetuserroles"
@@ -70,10 +81,12 @@ public class Aspnetuser implements Serializable {
 	private List<Aspnetrole> aspnetroles;
 
 	//bi-directional many-to-one association to Department
+	@JsonProperty("department")
 	@ManyToOne
 	private Department department;
 
 	//bi-directional many-to-one association to Document
+	@JsonProperty("Documents")
 	@OneToMany(mappedBy="aspnetuser")
 	private List<Document> documents;
 
@@ -112,19 +125,19 @@ public class Aspnetuser implements Serializable {
 		this.email = email;
 	}
 
-	public byte getEmailConfirmed() {
+	public Boolean getEmailConfirmed() {
 		return this.emailConfirmed;
 	}
 
-	public void setEmailConfirmed(byte emailConfirmed) {
+	public void setEmailConfirmed(Boolean emailConfirmed) {
 		this.emailConfirmed = emailConfirmed;
 	}
 
-	public byte getLockoutEnabled() {
+	public Boolean getLockoutEnabled() {
 		return this.lockoutEnabled;
 	}
 
-	public void setLockoutEnabled(byte lockoutEnabled) {
+	public void setLockoutEnabled(Boolean lockoutEnabled) {
 		this.lockoutEnabled = lockoutEnabled;
 	}
 
@@ -152,11 +165,11 @@ public class Aspnetuser implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public byte getPhoneNumberConfirmed() {
+	public Boolean getPhoneNumberConfirmed() {
 		return this.phoneNumberConfirmed;
 	}
 
-	public void setPhoneNumberConfirmed(byte phoneNumberConfirmed) {
+	public void setPhoneNumberConfirmed(Boolean phoneNumberConfirmed) {
 		this.phoneNumberConfirmed = phoneNumberConfirmed;
 	}
 
@@ -168,11 +181,11 @@ public class Aspnetuser implements Serializable {
 		this.securityStamp = securityStamp;
 	}
 
-	public byte getTwoFactorEnabled() {
+	public Boolean getTwoFactorEnabled() {
 		return this.twoFactorEnabled;
 	}
 
-	public void setTwoFactorEnabled(byte twoFactorEnabled) {
+	public void setTwoFactorEnabled(Boolean twoFactorEnabled) {
 		this.twoFactorEnabled = twoFactorEnabled;
 	}
 
@@ -265,5 +278,6 @@ public class Aspnetuser implements Serializable {
 
 		return document;
 	}
+	
 
 }

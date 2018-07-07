@@ -3,6 +3,8 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the aspnetuserlogins database table.
@@ -20,6 +22,7 @@ public class Aspnetuserlogin implements Serializable {
 	//bi-directional many-to-one association to Aspnetuser
 	@ManyToOne
 	@JoinColumn(name="UserId")
+	@JsonProperty("Aspnetuser")
 	private Aspnetuser aspnetuser;
 
 	public Aspnetuserlogin() {

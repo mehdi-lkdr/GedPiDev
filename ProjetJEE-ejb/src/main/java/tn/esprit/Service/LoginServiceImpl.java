@@ -1,23 +1,15 @@
 package tn.esprit.Service;
 
-import java.net.URLEncoder;
-
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
-import javax.json.Json;
-import javax.json.JsonReader;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,7 +20,6 @@ import tn.esprit.entities.UserInfo;
 @Default
 public class LoginServiceImpl implements  LoginService,LoginServiceRemote {
 	
-	private ObjectMapper mapper = new ObjectMapper();
 	private ResteasyClient client = new ResteasyClientBuilder().build();
     ResteasyWebTarget target = client.target("http://localhost:10040/token");
 	@Override
@@ -40,10 +31,16 @@ public class LoginServiceImpl implements  LoginService,LoginServiceRemote {
 		try{
 	        Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
 	        String retour = response.readEntity(String.class) ;
+	        System.out.println(retour);
 			if(retour.lastIndexOf("access_token") != -1){
-				JSONParser parser = new JSONParser();
-				JSONObject json = (JSONObject) parser.parse(retour);
-			UserInfo u = new UserInfo(json.getString("userName"),json.getString("access_token"),json.getString("token_type")) ;
+				
+			UserInfo u = new UserInfo() ;	
+			System.out.println(retour.indexOf("userName")+3);
+			System.out.println(retour.indexOf("token_type")-3);
+			u.setAccess_token(retour.substring(retour.indexOf("access_token")+15, retour.indexOf("token_type")-3));
+			u.setToken_type("bearer");
+			u.setUserName(retour.substring(retour.indexOf("userName")+11,retour.indexOf(".issued")-3));
+			response.close(); 
 			return u ; 
 			}else{
 				return null ;

@@ -2,6 +2,9 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
@@ -17,8 +20,9 @@ public class Aspnetrole implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonProperty("UserId")
 	private String id;
-
+	@JsonProperty("RoleId")
 	private String name;
 
 	//bi-directional many-to-many association to Aspnetuser
